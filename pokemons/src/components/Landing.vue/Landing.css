@@ -1,0 +1,27 @@
+
+
+.landing-content img {
+    width: 380px;
+}
+
+.landing-content h3 {
+    font-size: 30px;
+}
+
+.landing-content h5 {
+    font-size: 20px;
+    color: rgb(70, 70, 70);
+    letter-spacing: 1px;
+}
+
+.landing-content button {
+
+    border: none;
+    font-weight: 600;
+    font-size: 25px;
+    color: aliceblue;
+    width: 180px;
+    height: 60px;
+    border-radius: 40px;
+    background-color: rgb(255, 53, 53);
+}
