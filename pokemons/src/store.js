@@ -5,20 +5,29 @@ import Vuex from 'vuex'
 
 export default new Vuex.Store({
     state: {
-        pokemonsFavorites: []
+        pokemonsFavorites: [],
+        pokemonFinded: []
     },
     mutations: {
         addFavorite(state, poke) {
             let cont = [...state.pokemonsFavorites, poke]
-             state.pokemonsFavorites = cont
+            state.pokemonsFavorites = cont
+
+        },
+        pokeFinded(state, poke) {
+
+            state.pokemonFinded = [poke]
+
+            console.log(state.pokemonFinded);
         }
     },
     actions: {
-        addFavorite(context, poke){
+        addFavorite(context, poke) {
             context.commit("addFavorite", poke)
-        }
+        },
+
     },
     getters: {
 
     }
-})
+}) 

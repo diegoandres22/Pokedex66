@@ -3,12 +3,16 @@
 
     <div v-if="this.switch" class="list">
 
+        <p v-for=" a in $store.state.pokemonFinded " :key="a">
+            <button @click="showPokemonModal(a)">{{ a['name'] }}</button>
+            <button @click="handlerFav(a.name)">❤️</button>
+        </p>
+
         <transfition name="fade">
             <div class="modal-overlay" v-if="showModal">
 
             </div>
         </transfition>
-
 
         <transition name="fade">
             <div class="modal-cont">
@@ -26,17 +30,17 @@
                     <div><b>types : </b>{{ selectedPokemon.types.join(', ') }}</div>
                 </div>
             </div>
-
         </transition>
 
 
 
         <p v-for=" a  in  pokemons.results " :key="a">
-            <button @click="showPokemonModal(a)">{{ a['name'] }}</button>
-            <button @click="handlerFav(a.name)">❤️</button>
+            <button v-if="!this.$store.state.pokemonFinded.length" @click="showPokemonModal(a)">{{ a['name']
+            }}</button>
+            <button v-if="!this.$store.state.pokemonFinded.length" @click="handlerFav(a.name)">❤️</button>
         </p>
 
-        <div class="paginate">
+        <div v-if="!this.$store.state.pokemonFinded.length" class="paginate">
             <button v-if="this.cant > 1" @click="paginaBack">back</button>
             <b v-if="this.cant > 1"> {{ this.cant / 20 + 1 }}</b>
             <button @click="paginaNext">Next</button>
@@ -44,7 +48,6 @@
 
 
     </div>
-
 
 
 
@@ -83,7 +86,7 @@ export default {
     },
     data() {
         return {
-            switch: 0,
+            switch: 1,
             cant: 0,
             showModal: false,
             pokemons: [],
@@ -127,7 +130,7 @@ export default {
 
             let pokemonDetail = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name).then((res) => res.json())
             let types = pokemonDetail.types.map(typeObj => typeObj.type.name);
-            
+
             let objet = {
                 img: pokemonDetail.sprites.front_default,
                 name: pokemonDetail.name,
@@ -135,7 +138,6 @@ export default {
                 weight: pokemonDetail.weight,
                 types: types
             }
-            console.log(objet.img);
             this.selectedPokemon = objet;
             this.showModal = true;
 
