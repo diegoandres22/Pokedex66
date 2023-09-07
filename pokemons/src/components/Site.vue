@@ -2,10 +2,39 @@
     <Search></Search>
 
     <div v-if="this.switch" class="list">
-        <h1>{{ $store.state.name }}</h1>
-        <p v-for=" a  in  pokemons.results " :key="a">{{ a['name'] }} <button @click="handlerFav(a.name)">❤️</button>
-        </p>
 
+        <transfition name="fade">
+            <div class="modal-overlay" v-if="showModal">
+
+            </div>
+        </transfition>
+
+
+        <transition name="fade">
+            <div class="modal-cont">
+                <div class="modal" v-if="showModal">
+
+                    <button @click="closeModal">Cerrar</button>
+                    <img :src="selectedPokemon.img">
+
+                    <div><b>name : </b>{{ selectedPokemon.name }}</div>
+                    <br>
+                    <div><b>weight : </b>{{ selectedPokemon.weight }}</div>
+                    <br>
+                    <div><b>height : </b>{{ selectedPokemon.height }}</div>
+                    <br>
+                    <div><b>types : </b>{{ selectedPokemon.types.join(', ') }}</div>
+                </div>
+            </div>
+
+        </transition>
+
+
+
+        <p v-for=" a  in  pokemons.results " :key="a">
+            <button @click="showPokemonModal(a)">{{ a['name'] }}</button>
+            <button @click="handlerFav(a.name)">❤️</button>
+        </p>
 
         <div class="paginate">
             <button v-if="this.cant > 1" @click="paginaBack">back</button>
@@ -13,7 +42,20 @@
             <button @click="paginaNext">Next</button>
         </div>
 
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div v-if="!this.switch" class="list">
         <h1>favorites</h1>
 
@@ -43,6 +85,7 @@ export default {
         return {
             switch: 0,
             cant: 0,
+            showModal: false,
             pokemons: [],
             pokemonsFavorites: []
         }
@@ -79,7 +122,26 @@ export default {
         paginaBack: async function () {
             this.cant -= 20
             this.pokemons = await fetch('https://pokeapi.co/api/v2/pokemon?offset=' + this.cant + '&limit=20').then((res) => res.json())
-        }
+        },
+        showPokemonModal: async function (pokemon) {
+
+            let pokemonDetail = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name).then((res) => res.json())
+            let types = pokemonDetail.types.map(typeObj => typeObj.type.name);
+            
+            let objet = {
+                img: pokemonDetail.sprites.front_default,
+                name: pokemonDetail.name,
+                height: pokemonDetail.height,
+                weight: pokemonDetail.weight,
+                types: types
+            }
+            console.log(objet.img);
+            this.selectedPokemon = objet;
+            this.showModal = true;
+
+        }, closeModal() {
+            this.showModal = false;
+        },
 
     },
 
