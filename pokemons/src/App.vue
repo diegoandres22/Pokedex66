@@ -1,17 +1,14 @@
-
 <template>
-  <Landing />
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 
-import Landing from './components/Landing/Landing.vue'
-
 export default {
   name: 'App',
-  components: {
-    Landing
-  }
+ 
 }
 </script>
 

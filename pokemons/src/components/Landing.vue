@@ -1,17 +1,19 @@
 <template>
     <div class="landing-content">
 
-        <img alt="Pikachu" src="../../assets/pikachuEdit.png">
+        <img alt="Pikachu" src="../assets/pikachu.png">
         <h3>Welcome to Pokédex</h3>
         <h5>The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world.</h5>
-        <button>Get started</button>
+        <button>
+            <router-link class="buton" to="/site">Get started</router-link>
+        </button>
     </div>
 </template>
   
 <script>
 
 export default {
-    name: 'App',
+    name: 'LandingComponent',
     components: {
 
     }
@@ -19,6 +21,5 @@ export default {
 </script>
 
 <style>
-
-@import './Landing.css'
+@import '../assets/Landing.css'
 </style>

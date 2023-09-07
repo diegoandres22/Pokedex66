@@ -12,6 +12,8 @@
     font-size: 20px;
     color: rgb(70, 70, 70);
     letter-spacing: 1px;
+    width: 80%;
+    margin: auto auto 5% auto ;
 }
 
 .landing-content button {
@@ -24,4 +26,9 @@
     height: 60px;
     border-radius: 40px;
     background-color: rgb(255, 53, 53);
+}
+.buton{
+
+   color: aliceblue;
+   text-decoration: none;
 }

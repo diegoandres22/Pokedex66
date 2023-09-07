@@ -1,4 +1,24 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
-createApp(App).mount('#app')
+import App from './App.vue'
+import Landin from '../src/components/Landing'
+import Site from "../src/components/Site";
+
+
+const routes = [
+    { path: '/', component: Landin },
+    { path: '/site', component: Site }
+]
+
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+})
+
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
