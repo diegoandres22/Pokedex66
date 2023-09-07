@@ -1,19 +1,54 @@
-.list {
-    background-color: rgb(210, 210, 210);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400&display=swap');
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
-    height: 750px;
+html{
+    max-height: 100vh ;
+}
+
+
+.list {
+    height: 80%;
+    width: 90vw;
     overflow: auto;
 }
 
 .buttons {
-    background-color: rgb(227, 181, 227);
+    background-color: rgb(255, 255, 255);
     position: absolute;
     width: 100%;
-    height: 80px;
+    height: 60px;
     display: flex;
     justify-content: space-around;
     bottom: 0;
     left: 0;
+    box-shadow: #000000 5px 10px 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttons button{
+    width: 120px;
+    height: 70%;
+    background: #F22539;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 1.1em;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.gris{
+    background: #bfbfbf !important; 
 }
 
 .modal-overlay {
@@ -37,13 +72,15 @@
 
 .modal {
     position: fixed;
-    top: 20%;
-    width: 50%;
-    height: 50%;
+    top: 10%;
+    width: 80%;
+    height: 80%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
+    gap: .2em;
 
     background-color: white;
     padding: 20px;
@@ -51,4 +88,150 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     max-width: 80%;
     text-align: center;
+    overflow: hidden;
+}
+
+.infoPoke{
+    position: absolute;
+    width: 100%;
+    bottom: 15%;
+}
+
+.infoPoke div{
+    display: flex;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 50px;
+    width: 100%;
+    border-bottom: solid 1px #000;
+    display: flex;
+    font-size: 1em;
+    text-transform: capitalize;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+
+    
+}
+
+.cerrar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    background: transparent;
+    color: #fff;
+    font-size: 2em;
+    border: none;
+    outline: none;
+}
+
+.fondoFoto{
+position: absolute;
+top: 0;
+width: 250%;
+max-height: 50%;
+}
+
+.fotoPoke{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    min-width: 25%;
+}
+
+.accionModal{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.share{
+    width: 150px;
+    height: 50px;
+    background: #F22539;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 1em;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.list p {
+    position: relative;
+    background: #ffffff;
+    min-height: 7%;
+    border-radius: 10px;
+}
+
+.like{
+    position: absolute;
+    height: 45px;
+    width: 45px;
+    border-radius:50% ;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+}
+
+.like i{
+    font-size: 2em;
+    color: #bfbfbf;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    
+}
+
+.nameOfP{
+    height: 100%;
+    width: 80%;
+    position: absolute;
+    left: -20%;
+    font-size: 1.5em;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
+.paginadoButton{
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    font-size: 2em;
+    background: #ffffff;
+    color: #bfbfbf;
+}
+
+.numeroDePagina{
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #bfbfbf;
+}
+
+.paginate{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

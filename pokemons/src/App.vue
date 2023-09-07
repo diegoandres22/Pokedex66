@@ -8,7 +8,7 @@
 
 export default {
   name: 'App',
- 
+
 }
 </script>
 
@@ -18,6 +18,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 * {

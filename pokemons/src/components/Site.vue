@@ -3,10 +3,11 @@
 
     <div v-if="this.switch" class="list">
 
-        <p v-for=" a in $store.state.pokemonFinded " :key="a">
-            <button @click="showPokemonModal(a)">{{ a['name'] }}</button>
-            <button @click="handlerFav(a.name)">❤️</button>
-        </p>
+        <!-- <p v-for=" a  in  pokemons.results " :key="a">
+            <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name'] }}</button>
+
+            <button class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+        </p> -->
 
         <transfition name="fade">
             <div class="modal-overlay" v-if="showModal">
@@ -18,32 +19,54 @@
             <div class="modal-cont">
                 <div class="modal" v-if="showModal">
 
-                    <button @click="closeModal">Cerrar</button>
-                    <img :src="selectedPokemon.img">
+                    <img alt="fondo modal" src="../assets/fondoModal.png" class="fondoFoto">
 
-                    <div><b>name : </b>{{ selectedPokemon.name }}</div>
-                    <br>
-                    <div><b>weight : </b>{{ selectedPokemon.weight }}</div>
-                    <br>
-                    <div><b>height : </b>{{ selectedPokemon.height }}</div>
-                    <br>
-                    <div><b>types : </b>{{ selectedPokemon.types.join(', ') }}</div>
+                    <button class="cerrar" @click="closeModal"><i class='bx bxs-x-circle'></i></button>
+
+                    <img :src="selectedPokemon.img" class="fotoPoke">
+
+                    <div class="infoPoke">
+                        <div><b>name: </b> {{ selectedPokemon.name }}</div>
+                        <br>
+                        <div><b>weight: </b> {{ selectedPokemon.weight }}</div>
+                        <br>
+                        <div><b>height: </b> {{ selectedPokemon.height }}</div>
+                        <br>
+                        <div><b>types: </b> {{ selectedPokemon.types.join(', ') }}</div>
+                    </div>
+
+                    <div class="accionModal">
+                        <button class="share"> Share to my friends</button>
+                        <button class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+                    </div>
                 </div>
             </div>
         </transition>
 
 
 
-        <p v-for=" a  in  pokemons.results " :key="a">
+        <!-- <p v-for=" a  in  pokemons.results " :key="a">
             <button v-if="!this.$store.state.pokemonFinded.length" @click="showPokemonModal(a)">{{ a['name']
             }}</button>
             <button v-if="!this.$store.state.pokemonFinded.length" @click="handlerFav(a.name)">❤️</button>
+        </p> -->
+        <p v-for=" a  in  pokemons.results " :key="a">
+
+            <button class="nameOfP" v-if="!this.$store.state.pokemonFinded.length" @click="showPokemonModal(a)">{{ a['name']
+            }}</button>
+
+            <button class="like" v-if="!this.$store.state.pokemonFinded.length" @click="handlerFav(a.name)"><i
+                    class='bx bxs-star'></i></button>
+
         </p>
 
+
         <div v-if="!this.$store.state.pokemonFinded.length" class="paginate">
-            <button v-if="this.cant > 1" @click="paginaBack">back</button>
-            <b v-if="this.cant > 1"> {{ this.cant / 20 + 1 }}</b>
-            <button @click="paginaNext">Next</button>
+
+            <button class="paginadoButton" v-if="this.cant > 1" @click="paginaBack"><i class='bx bx-chevron-left'></i></button>
+
+            <b class="numeroDePagina" v-if="this.cant > 1"> {{ this.cant / 20 + 1 }}</b>
+            <button class="paginadoButton" @click="paginaNext"><i class='bx bx-chevron-right'></i></button>
         </div>
 
 
@@ -69,8 +92,10 @@
     </div>
 
     <div class="buttons">
-        <button @click="switchF">All </button>
-        <button @click="switchT">Favorites</button>
+        <button @click="switchF"> <i class='bx bx-menu'></i> All </button>
+
+        <button class="gris" @click="switchT"> 
+            <i class='bx bxs-star'></i> Favorites</button>
     </div>
 </template>
   
