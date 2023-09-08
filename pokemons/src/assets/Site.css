@@ -13,7 +13,7 @@ html {
 
 
 .list {
-    height: 80%;
+    height: 85%;
     width: 90vw;
     overflow: auto;
 }
@@ -43,15 +43,18 @@ html {
     color: #fff;
     border-radius: 20px;
     font-size: 1.1em;
+    font-weight: 600;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
-.gris{
+
+.gris {
     background-color: #df0000da !important;
 }
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -104,7 +107,7 @@ html {
 .infoPoke div {
     display: flex;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+
     width: 80%;
     border-bottom: solid 1px #b1b1b1;
     display: flex;
@@ -181,10 +184,12 @@ html {
     border-radius: 10px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .list h3 {
-  font-size: 30px;
+    font-size: 30px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .like {
     position: absolute;
     height: 45px;
@@ -198,7 +203,8 @@ html {
     outline: none;
     cursor: pointer;
 }
-.like2  {
+
+.like2 {
     position: absolute;
     height: 45px;
     width: 45px;
@@ -211,10 +217,12 @@ html {
     outline: none;
     cursor: pointer;
 }
+
 .like2 i {
     font-size: 2.5em;
     color: #eede00;
 }
+
 .like i {
     font-size: 2em;
     color: #c9c9c9;
@@ -230,6 +238,10 @@ html {
     flex-direction: column;
     gap: .5em;
 
+}
+
+.listFav {
+    margin-top: 30px;
 }
 
 .nameOfP {
@@ -272,7 +284,52 @@ html {
     align-items: center;
     justify-content: space-evenly;
 }
-.liList{
+
+.liList {
     background-color: #2e2e2e38;
     height: 20px;
+}
+
+/* ERRORS */
+.errorcontent {
+    margin-top: 20px;
+}
+
+.errorFirstP {
+    background-color: transparent !important;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.errorSecondP {
+    background-color: transparent !important;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.errorButtonCont {
+    background-color: transparent !important;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorButtonCont button {
+    width: 150px;
+    height: 70%;
+    border: none;
+    outline: none;
+    background: #df0000da;
+    color: #ffffff;
+    border-radius: 20px;
+
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

@@ -1,10 +1,10 @@
 <template>
     <div class="site-content">
-        <input class="searchbar" placeholder="Search" type="text" v-model="searchInput">
+        <input class="searchbar" placeholder="Search" type="text" v-model="searchInput" @keyup.enter="logSearchInput" >
         <button class="magnifyer" :disabled="searchInput.length === 0" @click="logSearchInput"><i class='bx bx-search-alt-2'></i></button>
     </div>
 </template>
-  
+
 <script>
 
 export default {
@@ -31,7 +31,7 @@ export default {
 
                 this.$store.state.pokemonFinded = [objFinded]
             } else {
-                alert("No hallé nada");
+                this.$store.state.pokemonFinded = ["THERE", "IS", "NOTHING"]
             }
 
             this.$store.dispatch("pokeFinded")

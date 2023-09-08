@@ -2,14 +2,20 @@
     <Search></Search>
 
     <div v-if="this.switch" class="list">
+        <!-- RESULTADOS DE LA BÚSQUEDA -->
+        <div class="list" v-if="$store.state.pokemonFinded.length == 1">
 
-        <p v-for=" a in $store.state.pokemonFinded " :key="a">
-            <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name'] }}</button>
+            <p v-for=" a in $store.state.pokemonFinded " :key="a">
+                <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name'] }}</button>
 
-            <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+                <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i
+                        class='bx bxs-star'></i></button>
 
-            <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
-        </p>
+                <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i
+                        class='bx bxs-star'></i></button>
+            </p>
+        </div>
+
 
         <transfition name="fade">
             <div class="modal-overlay" v-if="showModal">
@@ -38,26 +44,49 @@
                     </div>
 
                     <div class="accionModal">
-                        <button class="share"> Share to my friends</button>
-                        <button class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+                        <!-- <button class="share"> Share to my friends</button> -->
+                        <button class="share" @click="copiarAlPortapapeles(selectedPokemon)">Share to my friends</button>
+
+                        <button v-if="!$store.state.pokemonsFavorites.includes(selectedPokemon.name)" class="like"
+                            @click="handlerFav(selectedPokemon.name)"><i class='bx bxs-star'></i></button>
+
+                        <button v-if="$store.state.pokemonsFavorites.includes(selectedPokemon.name)" class="like2"
+                            @click="handlerFav(selectedPokemon.name)"><i class='bx bxs-star'></i></button>
                     </div>
                 </div>
             </div>
         </transition>
+        <!-- LISTA DE POKEMONES-->
+        <div class="list" v-if="$store.state.pokemonFinded.length == 0">
+            <p v-for=" a  in  pokemons.results " :key="a" >
 
-        <p v-for=" a  in  pokemons.results " :key="a">
+                <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name']
+                }}</button>
 
-            <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name']
-            }}</button>
+                <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i
+                        class='bx bxs-star'></i></button>
 
-            <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+                <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i
+                        class='bx bxs-star'></i></button>
 
-            <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+            </p>
+        </div>
 
-        </p>
+        <!-- ERROR EN LA BUSQUEDA-->
+        <div class="errorcontent" v-if="$store.state.pokemonFinded.length == 3">
+
+            <p class="errorFirstP">Uh-oh!</p> 
+
+            <p class="errorSecondP">You look lost on your journey!</p>
+
+            <div class="errorButtonCont">
+                <button @click="switchF"> Go back home</button>
+            </div>
+
+        </div>
 
 
-        <div class="paginate">
+        <div class="paginate" v-if="$store.state.pokemonFinded.length == 0">
 
             <button class="paginadoButton" v-if="this.cant > 1" @click="paginaBack"><i
                     class='bx bx-chevron-left'></i></button>
@@ -66,11 +95,10 @@
             <button class="paginadoButton" @click="paginaNext"><i class='bx bx-chevron-right'></i></button>
         </div>
 
-
     </div>
 
-
-    <div v-if="!this.switch" class="list">
+    <!-- FAVORITOS -->
+    <div v-if="!this.switch" class="list listFav">
 
         <p v-for=" name  in $store.state.pokemonsFavorites " :key="name">
 
@@ -78,9 +106,11 @@
                 {{ name }}
             </button>
 
-            <button v-if="name !== undefined && !$store.state.pokemonsFavorites.includes(name) " class="like" @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
+            <button v-if="name !== undefined && !$store.state.pokemonsFavorites.includes(name)" class="like"
+                @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
 
-            <button v-if=" name !== undefined && $store.state.pokemonsFavorites.includes(name)" class="like2" @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
+            <button v-if="name !== undefined && $store.state.pokemonsFavorites.includes(name)" class="like2"
+                @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
 
         </p>
 
@@ -103,6 +133,8 @@
 <script>
 
 import Search from "./Search.vue";
+import VueClipboard from 'vue-clipboard2';
+
 
 export default {
     name: 'SearchComponent',
@@ -126,6 +158,8 @@ export default {
         },
         switchF() {
             this.switch = 1
+            this.$store.state.pokemonFinded = []
+            this.$store.dispatch("pokeFinded")
         },
         switchT() {
             this.switch = 0
@@ -168,14 +202,37 @@ export default {
             this.selectedPokemon = objet;
             this.showModal = true;
 
-        }, closeModal() {
+        },
+        closeModal() {
             this.showModal = false;
+        },
+        copiarAlPortapapeles(pokemon) {
+
+            const textoACopiar = `${pokemon.name}, weight: ${pokemon.weight}, height: ${pokemon.height}, types: ${pokemon.types.join(', ')}`;
+
+            const inputTemporal = document.createElement('input');
+
+            inputTemporal.setAttribute('value', textoACopiar);
+
+            document.body.appendChild(inputTemporal);
+
+            inputTemporal.select();
+
+            inputTemporal.setSelectionRange(0, 99999);
+
+            document.execCommand('copy');
+
+            document.body.removeChild(inputTemporal);
+
+            alert('¡Nombre y atributos de Pokémon copiados al portapapeles!');
         },
 
     },
-
     components: {
         Search
+    },
+    directives: {
+        clipboard: VueClipboard,
     }
 }
 
