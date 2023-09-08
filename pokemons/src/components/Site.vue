@@ -58,7 +58,7 @@
         </transition>
         <!-- LISTA DE POKEMONES-->
         <div class="list" v-if="$store.state.pokemonFinded.length == 0">
-            <p v-for=" a  in  pokemons.results " :key="a" >
+            <p v-for=" a  in  pokemons.results " :key="a">
 
                 <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name']
                 }}</button>
@@ -75,7 +75,7 @@
         <!-- ERROR EN LA BUSQUEDA-->
         <div class="errorcontent" v-if="$store.state.pokemonFinded.length == 3">
 
-            <p class="errorFirstP">Uh-oh!</p> 
+            <p class="errorFirstP">Uh-oh!</p>
 
             <p class="errorSecondP">You look lost on your journey!</p>
 
@@ -128,6 +128,10 @@
         <button class="gris" @click="switchT">
             <i class='bx bxs-star'></i> Favorites</button>
     </div>
+    <!--PANTALLA DE CARGA -->
+    <div v-if="loading" class="loaContent">
+        <img src="../assets/poke2bol.png" alt="">
+    </div>
 </template>
   
 <script>
@@ -148,13 +152,14 @@ export default {
             cant: 0,
             showModal: false,
             pokemons: [],
-            pokemonsFavorites: []
+            pokemonsFavorites: [],
+            loading: true
         }
     },
     methods: {
         getPokemons: async function () {
             this.pokemons = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20').then((res) => res.json())
-
+            this.loading = false
         },
         switchF() {
             this.switch = 1
