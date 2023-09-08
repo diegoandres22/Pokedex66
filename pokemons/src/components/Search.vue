@@ -1,7 +1,7 @@
 <template>
     <div class="site-content">
         <input class="searchbar" placeholder="Search" type="text" v-model="searchInput">
-        <button :disabled="searchInput.length === 0" @click="logSearchInput">Search</button>
+        <button class="magnifyer" :disabled="searchInput.length === 0" @click="logSearchInput"><i class='bx bx-search-alt-2'></i></button>
     </div>
 </template>
   

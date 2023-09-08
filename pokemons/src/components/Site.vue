@@ -3,11 +3,11 @@
 
     <div v-if="this.switch" class="list">
 
-        <!-- <p v-for=" a  in  pokemons.results " :key="a">
+        <p v-for=" a in $store.state.pokemonFinded " :key="a">
             <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name'] }}</button>
 
             <button class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
-        </p> -->
+        </p>
 
         <transfition name="fade">
             <div class="modal-overlay" v-if="showModal">
@@ -52,16 +52,16 @@
         </p> -->
         <p v-for=" a  in  pokemons.results " :key="a">
 
-            <button class="nameOfP" v-if="!this.$store.state.pokemonFinded.length" @click="showPokemonModal(a)">{{ a['name']
+            <button class="nameOfP"  @click="showPokemonModal(a)">{{ a['name']
             }}</button>
 
-            <button class="like" v-if="!this.$store.state.pokemonFinded.length" @click="handlerFav(a.name)"><i
+            <button class="like"  @click="handlerFav(a.name)"><i
                     class='bx bxs-star'></i></button>
 
         </p>
 
 
-        <div v-if="!this.$store.state.pokemonFinded.length" class="paginate">
+        <div class="paginate">
 
             <button class="paginadoButton" v-if="this.cant > 1" @click="paginaBack"><i class='bx bx-chevron-left'></i></button>
 

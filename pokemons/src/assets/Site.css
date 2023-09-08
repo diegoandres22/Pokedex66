@@ -191,7 +191,11 @@ max-height: 50%;
 
 .like i{
     font-size: 2em;
-    color: #bfbfbf;
+    color: #c9c9c9;
+}
+.like i:hover{
+    font-size: 2.5em;
+    color: #eede00;
 }
 .list{
     display: flex;
@@ -211,6 +215,7 @@ max-height: 50%;
     outline: none;
     text-transform: capitalize;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .paginadoButton{
@@ -220,14 +225,16 @@ max-height: 50%;
     width: 40px;
     border-radius: 50%;
     font-size: 2em;
-    background: #ffffff;
-    color: #bfbfbf;
+    background: #e6e6e6;
+    color: #ff0000;
 }
-
+.paginadoButton :hover{
+    cursor: pointer;
+}
 .numeroDePagina{
     font-size: 1.5em;
-    font-weight: 300;
-    color: #bfbfbf;
+    font-weight: 500;
+    color: #ff0000;
 }
 
 .paginate{
