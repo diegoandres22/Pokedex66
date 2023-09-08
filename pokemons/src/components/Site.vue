@@ -6,7 +6,9 @@
         <p v-for=" a in $store.state.pokemonFinded " :key="a">
             <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name'] }}</button>
 
-            <button class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+            <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+
+            <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
         </p>
 
         <transfition name="fade">
@@ -26,13 +28,13 @@
                     <img :src="selectedPokemon.img" class="fotoPoke">
 
                     <div class="infoPoke">
-                        <div><b>name: </b> {{ selectedPokemon.name }}</div>
-                        <br>
-                        <div><b>weight: </b> {{ selectedPokemon.weight }}</div>
-                        <br>
-                        <div><b>height: </b> {{ selectedPokemon.height }}</div>
-                        <br>
-                        <div><b>types: </b> {{ selectedPokemon.types.join(', ') }}</div>
+                        <div><b>name : </b> {{ selectedPokemon.name }}</div>
+
+                        <div><b>weight : </b> {{ selectedPokemon.weight }}</div>
+
+                        <div><b>height : </b> {{ selectedPokemon.height }}</div>
+
+                        <div><b>types :</b> {{ selectedPokemon.types.join(', ') }}</div>
                     </div>
 
                     <div class="accionModal">
@@ -43,27 +45,22 @@
             </div>
         </transition>
 
-
-
-        <!-- <p v-for=" a  in  pokemons.results " :key="a">
-            <button v-if="!this.$store.state.pokemonFinded.length" @click="showPokemonModal(a)">{{ a['name']
-            }}</button>
-            <button v-if="!this.$store.state.pokemonFinded.length" @click="handlerFav(a.name)">❤️</button>
-        </p> -->
         <p v-for=" a  in  pokemons.results " :key="a">
 
-            <button class="nameOfP"  @click="showPokemonModal(a)">{{ a['name']
+            <button class="nameOfP" @click="showPokemonModal(a)">{{ a['name']
             }}</button>
 
-            <button class="like"  @click="handlerFav(a.name)"><i
-                    class='bx bxs-star'></i></button>
+            <button v-if="!$store.state.pokemonsFavorites.includes(a.name)" class="like" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
+
+            <button v-if="$store.state.pokemonsFavorites.includes(a.name)" class="like2" @click="handlerFav(a.name)"><i class='bx bxs-star'></i></button>
 
         </p>
 
 
         <div class="paginate">
 
-            <button class="paginadoButton" v-if="this.cant > 1" @click="paginaBack"><i class='bx bx-chevron-left'></i></button>
+            <button class="paginadoButton" v-if="this.cant > 1" @click="paginaBack"><i
+                    class='bx bx-chevron-left'></i></button>
 
             <b class="numeroDePagina" v-if="this.cant > 1"> {{ this.cant / 20 + 1 }}</b>
             <button class="paginadoButton" @click="paginaNext"><i class='bx bx-chevron-right'></i></button>
@@ -73,28 +70,32 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
     <div v-if="!this.switch" class="list">
-        <h1>favorites</h1>
 
-        <ul>
-            <li v-for="(name, index) in $store.state.pokemonsFavorites" :key="index"> {{ name }} </li>
-        </ul>
+        <p v-for=" name  in $store.state.pokemonsFavorites " :key="name">
+
+            <button v-if="name !== undefined" class="nameOfP" @click="showPokemonModal(name)">
+                {{ name }}
+            </button>
+
+            <button v-if="name !== undefined && !$store.state.pokemonsFavorites.includes(name) " class="like" @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
+
+            <button v-if=" name !== undefined && $store.state.pokemonsFavorites.includes(name)" class="like2" @click="handlerFav(name)"><i class='bx bxs-star'></i></button>
+
+        </p>
 
     </div>
 
-    <div class="buttons">
-        <button @click="switchF"> <i class='bx bx-menu'></i> All </button>
+    <div class="buttons" v-if="this.switch">
+        <button class="gris" @click="switchF"> <i class='bx bx-menu'></i> All </button>
 
-        <button class="gris" @click="switchT"> 
+        <button class="rojo" @click="switchT">
+            <i class='bx bxs-star'></i> Favorites</button>
+    </div>
+    <div class="buttons" v-if="!this.switch">
+        <button class="rojo" @click="switchF"> <i class='bx bx-menu'></i> All </button>
+
+        <button class="gris" @click="switchT">
             <i class='bx bxs-star'></i> Favorites</button>
     </div>
 </template>
@@ -141,6 +142,7 @@ export default {
                 this.$store.state.pokemonsFavorites = this.pokemonsFavorites
             }
             this.$store.dispatch("addFavorite")
+            console.log(this.$store.state.pokemonsFavorites);
         },
         paginaNext: async function () {
             this.cant += 20
